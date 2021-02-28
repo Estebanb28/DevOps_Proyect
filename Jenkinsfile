@@ -30,7 +30,7 @@ pipeline {
             steps {
                 script {
                     branchName = ""
-                    if (!env.BRANCH_NAME.contains("master")) {
+                    if (!env.BRANCH_NAME.contains("main")) {
                         branchName = "-Dsonar.branch.name=${env.BRANCH_NAME}"
                     }
                  }
@@ -62,7 +62,7 @@ pipeline {
             steps {
             	script {
 
-                    if ( env.BRANCH_NAME.equals("master") ) {
+                    if ( env.BRANCH_NAME.equals("main") ) {
 
                         version = ":$BUILD_NUMBER"
 
@@ -86,7 +86,7 @@ pipeline {
 		echo 'Registry+version2'
 		echo "$registry"
 		echo "$version"
-                //sh "docker rmi $registry" + ":" + "$version"	 
+                //sh "docker rmi $registry" + ":" + "$version"
             	sh "docker rmi $registry$version"
 		} 
             	
