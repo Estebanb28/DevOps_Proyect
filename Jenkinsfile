@@ -80,7 +80,7 @@ pipeline {
                         docker.withRegistry( '', registryCredential ) {
                             dockerImage.push('latest')
                 	    }
-                        sh "docker rmi " + ${registry} + "latest"
+                        sh "docker rmi " + "${registry}" + "latest"
                     }
                     sh "docker rmi $registry$version"	 
             	} 
