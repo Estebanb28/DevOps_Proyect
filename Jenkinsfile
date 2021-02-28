@@ -80,12 +80,15 @@ pipeline {
                         docker.withRegistry( '', registryCredential ) {
                             dockerImage.push('latest')
                 	    }
-			echo 'Registry+version2'
-                        sh "docker rmi " + registry + "latest"
+			echo 'Registry+version1'
+                        sh "docker rmi " + registry + ":latest"
                     }
 		echo 'Registry+version2'
-                sh "docker rmi $registry" + ":" + "$version"	 
-            	} 
+		echo "$registry"
+		echo "$version"
+                //sh "docker rmi $registry" + ":" + "$version"	 
+            	sh "docker rmi $registry$version"
+		} 
             	
                 	         
             }
