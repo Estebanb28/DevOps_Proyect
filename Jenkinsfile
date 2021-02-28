@@ -49,7 +49,7 @@ pipeline {
 	        		sh "mvn org.sonarsource.scanner.maven:sonar-maven-plugin:sonar ${branchName}"
 		       	}	
               sleep(30)	       	
-		       	  timeout(time: 1, unit: 'MINUTES') { // Just in case something goes wrong, pipeline will be killed after a timeout
+		       	  timeout(time: 5, unit: 'MINUTES') { // Just in case something goes wrong, pipeline will be killed after a timeout
 	        		  waitForQualityGate abortPipeline: true
 		       	}
 
