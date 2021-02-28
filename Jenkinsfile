@@ -1,5 +1,3 @@
-set +e
-
 pipeline {
     agent none
 
@@ -32,7 +30,7 @@ pipeline {
             steps {
                 script {
                     branchName = ""
-                    if (!env.BRANCH_NAME.contains("main")) {
+                    if (!env.BRANCH_NAME.contains("master")) {
                         branchName = "-Dsonar.branch.name=${env.BRANCH_NAME}"
                     }
                  }
@@ -64,7 +62,7 @@ pipeline {
             steps {
             	script {
 
-                    if ( env.BRANCH_NAME.equals("main") ) {
+                    if ( env.BRANCH_NAME.equals("master") ) {
 
                         version = ":$BUILD_NUMBER"
 
@@ -82,9 +80,11 @@ pipeline {
                         docker.withRegistry( '', registryCredential ) {
                             dockerImage.push('latest')
                 	    }
+			echo 'Registry+version2'
                         sh "docker rmi " + registry + "latest"
                     }
-                    sh "docker rmi $registry$version"	 
+		echo 'Registry+version2'
+                sh "docker rmi $registry$version"	 
             	} 
             	
                 	         
