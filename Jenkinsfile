@@ -1,3 +1,5 @@
+set +e
+
 pipeline {
     agent none
 
